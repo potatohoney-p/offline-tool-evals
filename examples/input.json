@@ -1,0 +1,49 @@
+[
+  {
+    "id": "arithmetic",
+    "script": [
+      {
+        "kind": "tool",
+        "name": "add",
+        "args": {
+          "a": 2,
+          "b": 5
+        }
+      },
+      {
+        "kind": "answer",
+        "text": "7"
+      }
+    ],
+    "expected": {
+      "status": "answered",
+      "answer": "7"
+    }
+  },
+  {
+    "id": "forbidden",
+    "script": [
+      {
+        "kind": "tool",
+        "name": "shell",
+        "args": {}
+      }
+    ],
+    "expected": {
+      "status": "denied"
+    }
+  },
+  {
+    "id": "exhaustion",
+    "script": [
+      {
+        "kind": "answer",
+        "text": "unused"
+      }
+    ],
+    "max_steps": 0,
+    "expected": {
+      "status": "step_budget"
+    }
+  }
+]
