@@ -12,3 +12,7 @@ class FeatureTests(unittest.TestCase):
     def test_duplicate_ids(self):
         case={'id':'a','script':[],'expected':{}}
         with self.assertRaises(ValueError): evaluate([case,case],{})
+    def test_empty_assertions_rejected(self):
+        with self.assertRaises(ValueError): evaluate([{'id':'a','script':[],'expected':{}}],{})
+    def test_unknown_assertions_rejected(self):
+        with self.assertRaises(ValueError): evaluate([{'id':'a','script':[],'expected':{'magic':None}}],{})

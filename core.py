@@ -7,7 +7,7 @@ def run(script,tools,max_calls=4,max_steps=8):
         if step.get('kind')=='answer':
             if not isinstance(step.get('text'),str): return {'status':'invalid_answer','trace':trace,'answer':None}
             return {'status':'answered','trace':trace,'answer':step['text']}
-        if step.get('kind')!='tool' or step.get('name') not in tools:
+        if step.get('kind')!='tool' or not isinstance(step.get('name'),str) or step.get('name') not in tools:
             return {'status':'denied','trace':trace,'answer':None}
         if calls>=max_calls: return {'status':'call_budget','trace':trace,'answer':None}
         args=step.get('args')

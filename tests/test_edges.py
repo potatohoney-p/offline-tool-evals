@@ -6,3 +6,6 @@ class EdgeTests(unittest.TestCase):
     def test_stop_at_answer(self):
         result=run([{'kind':'answer','text':'done'},{'kind':'tool','name':'forbidden'}],{})
         self.assertEqual(result['answer'],'done'); self.assertEqual(result['trace'],[])
+    def test_non_string_tool_names_are_denied(self):
+        for name in [None,7,[],{}]:
+            self.assertEqual(run([{'kind':'tool','name':name,'args':{}}],{'add':add_tool})['status'],'denied')
